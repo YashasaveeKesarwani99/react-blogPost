@@ -9,7 +9,8 @@ class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      selectedId: null
     };
   }
 
@@ -19,23 +20,36 @@ class Blog extends Component {
       const updatedPost = posts.map((post) => {
         return {
           ...post,
-          author: "premchand"
+          author: "premchand",
+          selectorId: null
         };
       });
       this.setState({ posts: updatedPost });
     });
   }
 
+  //updating selectorId
+  postSelector = (id) => {
+    return this.setState({ selectedId: id });
+  };
+
   render() {
     const posts = this.state.posts.map((obj) => {
-      return <Post author={obj.author} key={obj.id} title={obj.title} />;
+      return (
+        <Post
+          author={obj.author}
+          key={obj.id}
+          title={obj.title}
+          clicked={() => this.postSelector(obj.id)}
+        />
+      );
     });
 
     return (
       <div>
         <section className="Posts">{posts}</section>
         <section>
-          <FullPost />
+          <FullPost ID={this.state.selectedId} />
         </section>
         <section>
           <NewPost />
