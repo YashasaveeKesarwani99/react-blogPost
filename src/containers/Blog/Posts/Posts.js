@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Posts.css";
 import Post from "../../../components/Post/Post";
@@ -32,12 +33,13 @@ class Posts extends Component {
   render() {
     const posts = this.state.posts.map((obj) => {
       return (
-        <Post
-          author={obj.author}
-          key={obj.id}
-          title={obj.title}
-          clicked={() => this.postSelector(obj.id)}
-        />
+        <Link className="link" to={"/" + obj.id} key={obj.id}>
+          <Post
+            author={obj.author}
+            title={obj.title}
+            clicked={() => this.postSelector(obj.id)}
+          />
+        </Link>
       );
     });
     return <section className="Posts">{posts}</section>;
