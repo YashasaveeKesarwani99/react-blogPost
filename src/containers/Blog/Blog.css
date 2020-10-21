@@ -23,6 +23,7 @@
 .Blog li {
   margin: 20px;
 }
-.Blog a:hover {
+.Blog a:hover,
+.Blog .active {
   background-color: darkgray;
 }
