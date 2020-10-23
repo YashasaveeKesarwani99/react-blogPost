@@ -17,7 +17,7 @@ class NewPost extends Component {
       author: this.state.author
     };
     Axios.post("https://jsonplaceholder.typicode.com/posts", data).then((res) =>
-      console.log(res.data)
+      console.log(this.props)
     );
   };
 

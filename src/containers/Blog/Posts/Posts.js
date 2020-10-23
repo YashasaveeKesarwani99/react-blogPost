@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import axios from "axios";
+import FullPost from "../Fullpost/FullPost";
 import "./Posts.css";
 import Post from "../../../components/Post/Post";
 class Posts extends Component {
@@ -28,21 +29,27 @@ class Posts extends Component {
 
   //updating selectorId
   postSelector = (id) => {
-    return this.setState({ selectedId: id });
+    //navigating programatically
+    return this.props.history.push("/" + id);
   };
   render() {
     const posts = this.state.posts.map((obj) => {
       return (
-        <Link className="link" to={"/" + obj.id} key={obj.id}>
-          <Post
-            author={obj.author}
-            title={obj.title}
-            clicked={() => this.postSelector(obj.id)}
-          />
-        </Link>
+        //<Link className="link" to={"/" + obj.id} key={obj.id}>
+        <Post
+          author={obj.author}
+          title={obj.title}
+          clicked={() => this.postSelector(obj.id)}
+        />
+        //</Link>
       );
     });
-    return <section className="Posts">{posts}</section>;
+    return (
+      <div>
+        <section className="Posts">{posts}</section>;
+        <Route path="/:id" component={FullPost} />
+      </div>
+    );
   }
 }
 
