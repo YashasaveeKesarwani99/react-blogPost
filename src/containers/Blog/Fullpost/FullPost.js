@@ -11,10 +11,18 @@ class FullPost extends Component {
   }
   //for updating state
   componentDidMount() {
+    this.loadPost();
+  }
+
+  componentDidUpdate() {
+    this.loadPost();
+  }
+
+  loadPost() {
     if (this.props.match.params.id) {
       if (
         !this.state.postFull ||
-        this.state.postFull.id !== this.props.match.params.id
+        this.state.postFull.id !== +this.props.match.params.id
       )
         axios
           .get(
