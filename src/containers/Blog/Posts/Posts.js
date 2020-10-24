@@ -1,9 +1,12 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Link, Route } from "react-router-dom";
 import axios from "axios";
-import FullPost from "../Fullpost/FullPost";
+
 import "./Posts.css";
 import Post from "../../../components/Post/Post";
+
+const Fullpost = React.lazy(() => import("../Fullpost/FullPost"));
+
 class Posts extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +50,14 @@ class Posts extends Component {
     return (
       <div>
         <section className="Posts">{posts}</section>;
-        <Route path="/:id" component={FullPost} />
+        <Route
+          path="/:id"
+          render={() => (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Fullpost />
+            </Suspense>
+          )}
+        />
       </div>
     );
   }

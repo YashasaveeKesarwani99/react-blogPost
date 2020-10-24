@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./FullPost.css";
-
 class FullPost extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +32,7 @@ class FullPost extends Component {
             this.setState({ postFull: res.data });
             console.log(this.state.postFull);
           });
+      console.log(this.props);
     }
   }
 
